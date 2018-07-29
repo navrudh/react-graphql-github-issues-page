@@ -1,11 +1,12 @@
 import ApolloClient, {PresetConfig} from 'apollo-boost';
 import 'dotenv/config';
+import { GITHUB_PERSONAL_ACCESS_TOKEN } from './env-vars';
 
 const config: PresetConfig = {
   request: async operation => {
     operation.setContext({
       headers: {
-        authorization: `Bearer ${process.env.GITHUB_PERSONAL_ACCESS_TOKEN}`
+        authorization: `Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}`
       }
     });
   },
