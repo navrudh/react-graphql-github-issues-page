@@ -1,4 +1,4 @@
-import './Pagination.css'
+import './Pagination.css';
 
 import * as React from 'react';
 
@@ -19,20 +19,20 @@ const range = (from: number, to: number, step = 1) => {
   }
 
   return rangeArr;
-}
+};
 
 interface PaginationProps {
-  onPageChanged?: (data: any) => any,
-  pageLimit?: number,
-  pageNeighbours?: number,
-  totalRecords: number,
+  onPageChanged: (data: any) => any;
+  pageLimit: number;
+  pageNeighbours?: number;
+  totalRecords: number;
 }
 
-interface PaginationState {
-  currentPage: number,
-  totalPages?: number,
-  pageLimit?: number,
-  totalRecords?: number
+export interface PaginationState {
+  currentPage: number;
+  totalPages?: number;
+  pageLimit?: number;
+  totalRecords?: number;
 }
 
 class Pagination extends React.Component<PaginationProps, PaginationState> {
@@ -49,9 +49,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     this.totalRecords = typeof totalRecords === 'number' ? totalRecords : 0;
 
     // pageNeighbours can be: 0, 1 or 2
-    this.pageNeighbours = typeof pageNeighbours === 'number'
-      ? Math.max(0, Math.min(pageNeighbours, 2))
-      : 0;
+    this.pageNeighbours = typeof pageNeighbours === 'number' ? Math.max(0, Math.min(pageNeighbours, 2)) : 0;
 
     this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
 
@@ -63,11 +61,11 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
   }
 
   public gotoPage = (page: number) => {
-    const { onPageChanged = (f: any) => f } = this.props;
+    const onPageChanged = this.props.onPageChanged;
 
     const currentPage = Math.max(0, Math.min(page, this.totalPages));
 
-    const paginationData = {
+    const paginationData: PaginationState = {
       currentPage,
       pageLimit: this.pageLimit,
       totalPages: this.totalPages,
@@ -75,22 +73,22 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     };
 
     this.setState({ currentPage }, () => onPageChanged(paginationData));
-  }
+  };
 
   public handleClick = (page: number) => (evt: React.MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     this.gotoPage(page);
-  }
+  };
 
   public handleMoveLeft = (evt: React.MouseEvent<HTMLElement>) => {
     evt.preventDefault();
-    this.gotoPage(this.state.currentPage - (this.pageNeighbours * 2) - 1);
-  }
+    this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
+  };
 
   public handleMoveRight = (evt: React.MouseEvent<HTMLElement>) => {
     evt.preventDefault();
-    this.gotoPage(this.state.currentPage + (this.pageNeighbours * 2) + 1);
-  }
+    this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
+  };
 
   /**
    * Let's say we have 10 pages and we set pageNeighbours to 2
@@ -104,7 +102,6 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
    * {...x} => represents page neighbours
    */
   public fetchPageNumbers = (): any[] => {
-
     const totalPages = this.totalPages;
     const currentPage = this.state.currentPage;
     const pageNeighbours = this.pageNeighbours;
@@ -113,11 +110,10 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
      * totalNumbers: the total page numbers to show on the control
      * totalBlocks: totalNumbers + 2 to cover for the left(<) and right(>) controls
      */
-    const totalNumbers = (this.pageNeighbours * 2) + 3;
+    const totalNumbers = this.pageNeighbours * 2 + 3;
     const totalBlocks = totalNumbers + 2;
 
     if (totalPages > totalBlocks) {
-
       const startPage = Math.max(2, currentPage - pageNeighbours);
       const endPage = Math.min(totalPages - 1, currentPage + pageNeighbours);
 
@@ -129,26 +125,26 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
        * spillOffset: number of hidden pages either to the left or to the right
        */
       const hasLeftSpill = startPage > 2;
-      const hasRightSpill = (totalPages - endPage) > 1;
+      const hasRightSpill = totalPages - endPage > 1;
       const spillOffset = totalNumbers - (pages.length + 1);
 
       switch (true) {
         // handle: (1) < {5 6} [7] {8 9} (10)
-        case (hasLeftSpill && !hasRightSpill): {
+        case hasLeftSpill && !hasRightSpill: {
           const extraPages = range(startPage - spillOffset, startPage - 1);
           pages = [LEFT_PAGE, ...extraPages, ...pages];
           break;
         }
 
         // handle: (1) {2 3} [4] {5 6} > (10)
-        case (!hasLeftSpill && hasRightSpill): {
+        case !hasLeftSpill && hasRightSpill: {
           const extraPages = range(endPage + 1, endPage + spillOffset);
           pages = [...pages, ...extraPages, RIGHT_PAGE];
           break;
         }
 
         // handle: (1) < {4 5} [6] {7 8} > (10)
-        case (hasLeftSpill && hasRightSpill):
+        case hasLeftSpill && hasRightSpill:
         default: {
           pages = [LEFT_PAGE, ...pages, RIGHT_PAGE];
           break;
@@ -156,16 +152,15 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       }
 
       return [1, ...pages, totalPages];
-
     }
 
     return range(1, totalPages);
-
-  }
+  };
 
   public render() {
-
-    if (!this.totalRecords || this.totalPages === 1) { return null; }
+    if (!this.totalRecords || this.totalPages === 1) {
+      return null;
+    }
 
     const { currentPage } = this.state;
     const pages = this.fetchPageNumbers();
@@ -174,7 +169,6 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       <React.Fragment>
         <div className="pagination">
           {pages.map((page, index) => {
-
             if (page === LEFT_PAGE) {
               return (
                 <div key={index} className="page-item">
@@ -199,16 +193,15 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
 
             return (
               <div key={index} className={`page-item${currentPage === page ? ' active' : ''}`}>
-                <a className="page-link" href="#" onClick={this.handleClick(page)}>{page}</a>
+                <a className="page-link" href="#" onClick={this.handleClick(page)}>
+                  {page}
+                </a>
               </div>
             );
-
           })}
-
         </div>
       </React.Fragment>
     );
-
   }
 }
 
