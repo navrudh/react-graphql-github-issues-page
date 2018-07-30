@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import gql from "graphql-tag"
-import { Query } from "react-apollo";
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+import Issue from './Issue';
 
 interface QueryResult {
   repository: Repository;
@@ -13,14 +14,14 @@ interface Repository {
 
 interface Issues {
   totalCount: number;
-  edges: IssueEdges[];
+  edges: IssueEdge[];
 }
 
-interface IssueEdges {
+interface IssueEdge {
   node: IssueNode;
 }
 
-interface IssueNode {
+export interface IssueNode {
   id: string;
   title: string;
   url: string;
@@ -64,44 +65,43 @@ const query = (repoOwner: string, repoName: string, issuesFirst: number, issueSt
   }
 }
 
-`
+`;
 
 interface IssuesQueryProps {
-  repoOwner: string,
-  repoName: string,
-  issuesFirst?: number,
-  issueStatus?: 'OPEN' | 'CLOSED'
+  repoOwner: string;
+  repoName: string;
+  issuesFirst?: number;
+  issueStatus?: 'OPEN' | 'CLOSED';
 }
 
 class IssuesList extends React.Component<IssuesQueryProps> {
-
-  private repoOwner: string
-  private repoName: string
-  private issuesFirst: number
-  private issueStatus:  'OPEN' | 'CLOSED'
+  private repoOwner: string;
+  private repoName: string;
+  private issuesFirst: number;
+  private issueStatus: 'OPEN' | 'CLOSED';
 
   constructor(props: IssuesQueryProps) {
     super(props);
-    props = props
-    this.repoOwner = props.repoOwner
-    this.repoName = props.repoName
-    this.issuesFirst = props.issuesFirst || 20
-    this.issueStatus = props.issueStatus || 'OPEN'
+    props = props;
+    this.repoOwner = props.repoOwner;
+    this.repoName = props.repoName;
+    this.issuesFirst = props.issuesFirst || 20;
+    this.issueStatus = props.issueStatus || 'OPEN';
   }
 
   public render() {
     return (
       <Query query={query(this.repoOwner, this.repoName, this.issuesFirst, this.issueStatus)}>
         {({ loading, error, data }) => {
-          if (loading) { return <p>Loading...</p>; }
-          if (error) { return <p>Error :(</p>; }
+          if (loading) {
+            return <p>Loading...</p>;
+          }
+          if (error) {
+            return <p>Error :(</p>;
+          }
 
-          const queryResult: QueryResult = data
-          return queryResult.repository.issues.edges.map(({ node }) => (
-            <div key={node.id}>
-              <p>{`${node.title}: ${node.url}`}</p>
-            </div>
-          ));
+          const queryResult: QueryResult = data;
+          return queryResult.repository.issues.edges.map(({ node }) => <Issue {...node} />);
         }}
       </Query>
     );
