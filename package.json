@@ -17,9 +17,16 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-info": "^3.4.8",
+    "@storybook/addon-links": "^3.4.8",
+    "@storybook/addons": "^3.4.8",
+    "@storybook/react": "^3.4.8",
     "@types/enzyme": "^3.1.12",
     "@types/enzyme-adapter-react-16": "^1.0.2",
     "@types/jest": "^23.3.1",
@@ -28,9 +35,39 @@
     "@types/react": "^16.4.7",
     "@types/react-dom": "^16.0.6",
     "@types/react-redux": "^6.0.5",
+    "@types/storybook__addon-actions": "^3.4.0",
+    "@types/storybook__addon-info": "^3.2.3",
+    "@types/storybook__addon-links": "^3.3.1",
+    "@types/storybook__react": "^3.0.8",
+    "awesome-typescript-loader": "^5.2.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-runtime": "^6.26.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^23.4.2",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-test-renderer": "^16.4.1",
+    "ts-jest": "^23.0.1",
+    "ts-loader": "3.5.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^2.9.2"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "mapCoverage": true,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/lib/"
+    ],
+    "testRegex": "(/test/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
   }
 }
