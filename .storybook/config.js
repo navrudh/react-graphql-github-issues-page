@@ -1,3 +1,5 @@
+import '../node_modules/tachyons/css/tachyons.min.css'
+
 import { configure } from '@storybook/react';
 
 // automatically import all files ending in *.stories.tsx
