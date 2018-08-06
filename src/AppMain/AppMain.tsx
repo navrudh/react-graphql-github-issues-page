@@ -1,5 +1,3 @@
-import './AppMain.css';
-
 import * as React from 'react';
 
 import IssuesPage from '../IssuesPage/IssuesPage';
