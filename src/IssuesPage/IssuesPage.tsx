@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import Pagination, { PaginationState } from '../SharedComponents/Pagination';
 
-import gql from 'graphql-tag';
+import IssuesList from './IssuesList';
 import { Query } from 'react-apollo';
 import { client } from '../support';
-import IssuesList from './IssuesList';
+import gql from 'graphql-tag';
+import styled from 'styled-components';
 
 interface QueryResult {
   repository: Repository;
@@ -79,6 +80,10 @@ interface IssuesPageState {
   totalCount: number;
 }
 
+const Wrapper = styled.div.attrs({className: 'w-80 w-ns-100 center'})``;
+
+const PaginationContainer = styled.div.attrs({className: 'w-80 w-ns-100 center'})``;
+
 class IssuesPage extends React.Component {
   public state: IssuesPageState = {
     cursor: null,
@@ -142,11 +147,11 @@ class IssuesPage extends React.Component {
 
         this.paginationState = state;
       });
-  };
+  }
 
   public render() {
     return (
-      <div>
+      <Wrapper>
         <IssuesList {...this.state} firstCursor={this.state.cursor} />
 
         <Query query={query(this.state.repoOwner, this.state.repoName, this.state.itemsPerPage)}>
@@ -162,17 +167,18 @@ class IssuesPage extends React.Component {
             this.state.totalCount = queryResult.repository.issues.totalCount;
 
             return (
-              <div>
+              <PaginationContainer>
                 <Pagination
                   totalRecords={this.state.totalCount}
+                  pageNeighbours={4}
                   pageLimit={this.state.itemsPerPage}
                   onPageChanged={this.onPageChanged}
                 />
-              </div>
+              </PaginationContainer>
             );
           }}
         </Query>
-      </div>
+      </Wrapper>
     );
   }
 }
