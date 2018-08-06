@@ -1,6 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Pagination renders correctly 1`] = `
+exports[`Pagination renders and matches our snapshot 1`] = `
+<div
+  className="sc-bwzfXH flex justify-center tc center uTxCW"
+>
+  <div
+    className="bg-dark-blue sc-bdVaJa dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white bDWFJH"
+  >
+    <a
+      className="link white"
+      href="#"
+      onClick={[Function]}
+    >
+      1
+    </a>
+  </div>
+  <div
+    className="sc-bdVaJa dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white bDWFJH"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      2
+    </a>
+  </div>
+  <div
+    className="sc-bdVaJa dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white bDWFJH"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      3
+    </a>
+  </div>
+  <div
+    className="sc-bdVaJa dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white bDWFJH"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      4
+    </a>
+  </div>
+  <div
+    className="sc-bdVaJa dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white bDWFJH"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      5
+    </a>
+  </div>
+  <div
+    className="sc-bdVaJa dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white bDWFJH"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </div>
+  <div
+    className="sc-bdVaJa dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white bDWFJH"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </div>
+  <div
+    className="sc-bdVaJa dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white bDWFJH"
+  >
+    <a
+      aria-label="Next"
+      className="link"
+      href="#"
+      onClick={[Function]}
+    >
+      <span
+        aria-hidden="true"
+      >
+        »
+      </span>
+      <span
+        className="sr-only"
+      >
+        Next
+      </span>
+    </a>
+  </div>
+  <div
+    className="sc-bdVaJa dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white bDWFJH"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Pagination snapshot renders correctly 1`] = `
 <styled.div>
   <styled.div
     className="bg-dark-blue"
