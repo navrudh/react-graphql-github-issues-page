@@ -23,8 +23,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "css": "tachyons src/css/app.css > src/index.css --minify",
-    "prestart": "npm run css",
-    "prebuild": "npm run css"
+    "prestart": "yarn css",
+    "prebuild": "yarn css"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.8",
