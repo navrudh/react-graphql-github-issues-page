@@ -1,5 +1,7 @@
-import ApolloClient, {PresetConfig} from 'apollo-boost';
 import 'dotenv/config';
+
+import ApolloClient, { PresetConfig } from 'apollo-boost';
+
 import { GITHUB_PERSONAL_ACCESS_TOKEN } from './env-vars';
 
 const config: PresetConfig = {
@@ -10,7 +12,7 @@ const config: PresetConfig = {
       }
     });
   },
-  uri: 'https://api.github.com/graphql',
-}
+  uri: 'https://api.github.com/graphql'
+};
 
-export const client = new ApolloClient(config)
+export const client = new ApolloClient(config);
