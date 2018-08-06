@@ -5,6 +5,7 @@
   "dependencies": {
     "apollo-boost": "^0.1.12",
     "color": "^3.0.0",
+    "cross-fetch": "^2.2.2",
     "dotenv": "^6.0.0",
     "graphql": "^0.13.2",
     "react": "^16.4.1",
@@ -18,7 +19,7 @@
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts-ts eject",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -51,6 +52,7 @@
     "babel-runtime": "^6.26.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
     "jest": "^23.4.2",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-scripts-ts": "2.16.0",
@@ -60,5 +62,26 @@
     "ts-loader": "3.5.0",
     "tslint-react": "^3.6.0",
     "typescript": "^2.9.2"
+  },
+  "jest": {
+    "testURL": "http://localhost",
+    "setupTestFrameworkScriptFile": "<rootDir>/src/__tests__/setup.ts",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/lib/"
+    ],
+    "testRegex": "(/test/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
   }
 }

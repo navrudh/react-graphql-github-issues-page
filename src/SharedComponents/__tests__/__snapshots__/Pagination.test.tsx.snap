@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination renders correctly 1`] = `
+<styled.div>
+  <styled.div
+    className="bg-dark-blue"
+    key="0"
+  >
+    <a
+      className="link white"
+      href="#"
+      onClick={[Function]}
+    >
+      1
+    </a>
+  </styled.div>
+  <styled.div
+    className=""
+    key="1"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      2
+    </a>
+  </styled.div>
+  <styled.div
+    className=""
+    key="2"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      3
+    </a>
+  </styled.div>
+  <styled.div
+    className=""
+    key="3"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      4
+    </a>
+  </styled.div>
+  <styled.div
+    className=""
+    key="4"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      5
+    </a>
+  </styled.div>
+  <styled.div
+    className=""
+    key="5"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </styled.div>
+  <styled.div
+    className=""
+    key="6"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </styled.div>
+  <styled.div
+    key="7"
+  >
+    <a
+      aria-label="Next"
+      className="link"
+      href="#"
+      onClick={[Function]}
+    >
+      <span
+        aria-hidden="true"
+      >
+        »
+      </span>
+      <span
+        className="sr-only"
+      >
+        Next
+      </span>
+    </a>
+  </styled.div>
+  <styled.div
+    className=""
+    key="8"
+  >
+    <a
+      className="link black"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </styled.div>
+</styled.div>
+`;

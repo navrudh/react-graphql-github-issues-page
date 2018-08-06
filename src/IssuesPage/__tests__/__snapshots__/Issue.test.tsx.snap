@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Issue renders correctly 1`] = `
+<styled.article>
+  <styled.h1>
+     
+    Issue title
+     
+  </styled.h1>
+  <styled.article
+    color="#000000"
+    key="fix"
+  >
+    fix: 000000
+  </styled.article>
+  <styled.article
+    color="#000000"
+    key="fix"
+  >
+    fix: 000000
+  </styled.article>
+  <styled.article
+    color="#000000"
+    key="fix"
+  >
+    fix: 000000
+  </styled.article>
+  <styled.article
+    color="#000000"
+    key="fix"
+  >
+    fix: 000000
+  </styled.article>
+  <styled.article
+    color="#000000"
+    key="fix"
+  >
+    fix: 000000
+  </styled.article>
+</styled.article>
+`;

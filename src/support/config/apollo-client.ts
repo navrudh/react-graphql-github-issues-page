@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import 'cross-fetch/polyfill';
 
 import ApolloClient, { PresetConfig } from 'apollo-boost';
 
