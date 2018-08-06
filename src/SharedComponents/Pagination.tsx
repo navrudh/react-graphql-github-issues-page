@@ -1,6 +1,6 @@
-import './Pagination.css';
-
 import * as React from 'react';
+
+import styled from 'styled-components';
 
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';
@@ -21,8 +21,8 @@ const range = (from: number, to: number, step = 1) => {
   return rangeArr;
 };
 
-interface PaginationProps {
-  onPageChanged: (data: any) => any;
+export interface PaginationProps {
+  onPageChanged: (data: PaginationState) => void;
   pageLimit: number;
   pageNeighbours?: number;
   totalRecords: number;
@@ -34,6 +34,14 @@ export interface PaginationState {
   pageLimit?: number;
   totalRecords?: number;
 }
+
+const PaginationItem = styled.div.attrs({
+  className: 'dtc link dim f6 f5-ns pa3 br bl b--light-silver hover-bg-light-blue hover-white'
+})``;
+
+const Container = styled.div.attrs({
+  className: 'flex justify-center tc center'
+})``;
 
 class Pagination extends React.Component<PaginationProps, PaginationState> {
   private pageLimit: number;
@@ -73,22 +81,22 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     };
 
     this.setState({ currentPage }, () => onPageChanged(paginationData));
-  };
+  }
 
   public handleClick = (page: number) => (evt: React.MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     this.gotoPage(page);
-  };
+  }
 
   public handleMoveLeft = (evt: React.MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
-  };
+  }
 
   public handleMoveRight = (evt: React.MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
-  };
+  }
 
   /**
    * Let's say we have 10 pages and we set pageNeighbours to 2
@@ -101,7 +109,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
    * [x] => represents current page
    * {...x} => represents page neighbours
    */
-  public fetchPageNumbers = (): any[] => {
+  public fetchPageNumbers = (): (number | string)[] => {
     const totalPages = this.totalPages;
     const currentPage = this.state.currentPage;
     const pageNeighbours = this.pageNeighbours;
@@ -117,7 +125,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       const startPage = Math.max(2, currentPage - pageNeighbours);
       const endPage = Math.min(totalPages - 1, currentPage + pageNeighbours);
 
-      let pages: any[] = range(startPage, endPage);
+      let pages: (number | string)[] = range(startPage, endPage);
 
       /**
        * hasLeftSpill: has hidden pages to the left
@@ -155,7 +163,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     }
 
     return range(1, totalPages);
-  };
+  }
 
   public render() {
     if (!this.totalRecords || this.totalPages === 1) {
@@ -166,41 +174,43 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     const pages = this.fetchPageNumbers();
 
     return (
-      <React.Fragment>
-        <div className="pagination">
-          {pages.map((page, index) => {
-            if (page === LEFT_PAGE) {
-              return (
-                <div key={index} className="page-item">
-                  <a className="page-link" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
-                    <span aria-hidden="true">&laquo;</span>
-                    <span className="sr-only">Previous</span>
-                  </a>
-                </div>
-              );
-            }
-
-            if (page === RIGHT_PAGE) {
-              return (
-                <div key={index} className="page-item">
-                  <a className="page-link" href="#" aria-label="Next" onClick={this.handleMoveRight}>
-                    <span aria-hidden="true">&raquo;</span>
-                    <span className="sr-only">Next</span>
-                  </a>
-                </div>
-              );
-            }
-
+      <Container>
+        {pages.map((page, index) => {
+          if (page === LEFT_PAGE) {
             return (
-              <div key={index} className={`page-item${currentPage === page ? ' active' : ''}`}>
-                <a className="page-link" href="#" onClick={this.handleClick(page)}>
-                  {page}
+              <PaginationItem key={index}>
+                <a className="link" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
+                  <span aria-hidden="true">&laquo;</span>
+                  <span className="sr-only">Previous</span>
                 </a>
-              </div>
+              </PaginationItem>
             );
-          })}
-        </div>
-      </React.Fragment>
+          }
+
+          if (page === RIGHT_PAGE) {
+            return (
+              <PaginationItem key={index}>
+                <a className="link" href="#" aria-label="Next" onClick={this.handleMoveRight}>
+                  <span aria-hidden="true">&raquo;</span>
+                  <span className="sr-only">Next</span>
+                </a>
+              </PaginationItem>
+            );
+          }
+
+          return (
+            <PaginationItem key={index} className={`${currentPage === page ? 'bg-dark-blue' : ''}`}>
+              <a
+                className={'link ' + `${currentPage === page ? 'white' : 'black'}`}
+                href="#"
+                onClick={this.handleClick(+page)}
+              >
+                {page}
+              </a>
+            </PaginationItem>
+          );
+        })}
+      </Container>
     );
   }
 }
