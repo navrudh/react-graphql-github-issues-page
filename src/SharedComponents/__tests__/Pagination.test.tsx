@@ -70,7 +70,7 @@ describe('Pagination', () => {
     const component = shallow(<Pagination {...paginationProps} />);
 
     const instance = component.instance();
-    const spy = jest.spyOn(instance, 'handleMoveRight');
+    const spy = jest.spyOn(instance as Pagination, 'handleMoveRight');
 
     component.find('a').map(
       elem =>
@@ -106,7 +106,7 @@ describe('Pagination', () => {
     const component = shallow(<Pagination {...paginationProps} />);
 
     const instance = component.instance();
-    const spy = jest.spyOn(instance, 'handleMoveLeft');
+    const spy = jest.spyOn(instance as Pagination, 'handleMoveLeft');
 
     component.find('a').map(
       elem =>
