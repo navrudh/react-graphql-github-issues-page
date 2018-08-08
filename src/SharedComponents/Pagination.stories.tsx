@@ -20,4 +20,4 @@ const paginationProps: PaginationProps = {
   totalRecords: 100
 };
 
-stories.add('no badges', () => <Pagination {...paginationProps} />);
+stories.add('default', () => <Pagination {...paginationProps} />);
