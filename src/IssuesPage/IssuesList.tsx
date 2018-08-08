@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
 import Issue from './Issue';
+import MessageBlock from '../SharedComponents/MessageBlock';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 interface QueryResult {
   repository: Repository;
@@ -100,11 +101,20 @@ class IssuesList extends React.Component<IssuesQueryProps> {
     return (
       <Query query={query(this.repoOwner, this.repoName, this.itemsPerPage, this.props.firstCursor, this.issueStatus)}>
         {({ loading, error, data }) => {
+
           if (loading) {
-            return <p>Loading...</p>;
+            return (
+              <MessageBlock msgType={'warning'} content={'Loading...'} />
+            );
           }
+
           if (error) {
-            return <p>Error :(</p>;
+            return (
+              <MessageBlock
+                msgType={'error'}
+                content={'Error in executing query :('}
+              />
+            );
           }
 
           const queryResult: QueryResult = data;

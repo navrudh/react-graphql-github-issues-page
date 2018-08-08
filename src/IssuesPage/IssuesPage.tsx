@@ -3,6 +3,7 @@ import * as React from 'react';
 import Pagination, { PaginationState } from '../SharedComponents/Pagination';
 
 import IssuesList from './IssuesList';
+import MessageBlock from '../SharedComponents/MessageBlock';
 import { Query } from 'react-apollo';
 import { client } from '../support';
 import gql from 'graphql-tag';
@@ -37,7 +38,9 @@ const query = (
 ) => gql`
 {
   repository(owner: "${repoOwner}", name: "${repoName}") {
-    issues(first: ${issuesFirst}, after: ${cursor ? '"' + cursor + '"' : null} states: ${issueStatus}) {
+    issues(first: ${issuesFirst}, after: ${
+  cursor ? '"' + cursor + '"' : null
+} states: ${issueStatus}) {
       totalCount
       pageInfo {
         startCursor
@@ -59,7 +62,9 @@ const queryLast = (
 ) => gql`
 {
   repository(owner: "${repoOwner}", name: "${repoName}") {
-    issues(last: ${issuesFirst}, before: ${cursor ? '"' + cursor + '"' : null} states: ${issueStatus}) {
+    issues(last: ${issuesFirst}, before: ${
+  cursor ? '"' + cursor + '"' : null
+} states: ${issueStatus}) {
       totalCount
       pageInfo {
         startCursor
@@ -80,9 +85,11 @@ interface IssuesPageState {
   totalCount: number;
 }
 
-const Wrapper = styled.div.attrs({className: 'w-80 w-ns-100 center'})``;
+const Wrapper = styled.div.attrs({ className: 'w-80 w-ns-100 center' })``;
 
-const PaginationContainer = styled.div.attrs({className: 'w-80 w-ns-100 center'})``;
+const PaginationContainer = styled.div.attrs({
+  className: 'w-80 w-ns-100 center ma3'
+})``;
 
 class IssuesPage extends React.Component {
   public state: IssuesPageState = {
@@ -109,9 +116,17 @@ class IssuesPage extends React.Component {
     let QUERY = null;
 
     if (state.currentPage === 1) {
-      QUERY = query(this.state.repoOwner, this.state.repoName, this.state.itemsPerPage);
+      QUERY = query(
+        this.state.repoOwner,
+        this.state.repoName,
+        this.state.itemsPerPage
+      );
     } else if (state.currentPage === state.totalPages) {
-      QUERY = queryLast(this.state.repoOwner, this.state.repoName, this.state.itemsPerPage + 1);
+      QUERY = queryLast(
+        this.state.repoOwner,
+        this.state.repoName,
+        this.state.itemsPerPage + 1
+      );
     } else if (state.currentPage > this.paginationState.currentPage) {
       QUERY = query(
         this.state.repoOwner,
@@ -154,13 +169,26 @@ class IssuesPage extends React.Component {
       <Wrapper>
         <IssuesList {...this.state} firstCursor={this.state.cursor} />
 
-        <Query query={query(this.state.repoOwner, this.state.repoName, this.state.itemsPerPage)}>
+        <Query
+          query={query(
+            this.state.repoOwner,
+            this.state.repoName,
+            this.state.itemsPerPage
+          )}
+        >
           {({ loading, error, data }) => {
             if (loading) {
-              return <p>Loading...</p>;
+              return (
+                <MessageBlock msgType={'warning'} content={'Loading...'} />
+              );
             }
             if (error) {
-              return <p>Error :(</p>;
+              return (
+                <MessageBlock
+                  msgType={'error'}
+                  content={'Error in executing query :('}
+                />
+              );
             }
 
             const queryResult: QueryResult = data;

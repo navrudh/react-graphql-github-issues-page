@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageBlock with error message renders correctly 1`] = `
+<styled.article>
+  <styled.h1>
+     
+    Error Text
+     
+  </styled.h1>
+</styled.article>
+`;
+
+exports[`MessageBlock with warning message renders correctly 1`] = `
+<styled.article>
+  <styled.h1>
+     
+    Warning Text
+     
+  </styled.h1>
+</styled.article>
+`;
